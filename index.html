@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FIMMUN 2026 - Private Delegate Registration</title>
+  <style>
+    :root {
+      --bg-color: #eef2ff;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --primary-blue: #2563eb;
+      --primary-hover: #1d4ed8;
+      --border-color: #cbd5e1;
+      --dark-card: #1e293b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      padding-bottom: 50px;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .brand {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1e3a8a;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #3b82f6;
+      font-size: 0.95rem;
+    }
+
+    /* Form Container */
+    .container {
+      max-width: 680px;
+      margin: 20px auto;
+      background: var(--card-bg);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .form-header h1 {
+      font-size: 1.8rem;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+
+    .form-header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Form Layout */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #334155;
+    }
+
+    label .req {
+      color: #dc2626;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary-blue);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .sub-text {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    /* Radio Committee Grid */
+    .committee-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .radio-card {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .radio-card:hover {
+      background-color: #f8fafc;
+    }
+
+    .radio-card input[type="radio"] {
+      margin-right: 12px;
+      accent-color: var(--primary-blue);
+      width: 18px;
+      height: 18px;
+    }
+
+    .radio-card span {
+      font-size: 0.88rem;
+      color: #334155;
+    }
+
+    /* Registration Fee Box */
+    .fee-card {
+      background-color: #f0f7ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .fee-card h3 {
+      font-size: 1.1rem;
+      color: #1e3a8a;
+    }
+
+    .fee-card p {
+      font-size: 0.85rem;
+      color: #3b82f6;
+    }
+
+    .fee-amount {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1e3a8a;
+    }
+
+    /* Bank Details Box */
+    .bank-card {
+      background-color: var(--dark-card);
+      color: #ffffff;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 12px;
+    }
+
+    .bank-card h3 {
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .bank-acc-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .account-num {
+      font-family: monospace;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+    }
+
+    .btn-copy {
+      background: #334155;
+      color: #ffffff;
+      border: none;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+
+    .btn-copy:hover {
+      background: #475569;
+    }
+
+    .bank-name {
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    .bank-notes {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .bank-notes .warn {
+      color: #dc2626;
+      font-weight: 600;
+    }
+
+    /* File Input Styling */
+    .file-input-wrapper {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    /* Submit Button */
+    .btn-submit {
+      width: 100%;
+      background-color: var(--primary-blue);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-submit:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-submit:disabled {
+      background-color: #94a3b8;
+      cursor: not-allowed;
+    }
+
+    .footer-contact {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .footer-contact a {
+      color: var(--primary-blue);
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      .grid-2, .committee-grid {
+        grid-template-columns: 1fr;
+      }
+      .container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="brand">FIMMUN 2026</div>
+    <div class="nav-links">
+      <a href="#">Registration Options</a>
+      <a href="#">Status Checker</a>
+    </div>
+  </nav>
+
+  <!-- Form Container -->
+  <div class="container">
+    <div class="form-header">
+      <h1>Private Delegate Registration</h1>
+      <p>Register as an individual delegate for FIMMUN 2026</p>
+    </div>
+
+    <form id="fimmunForm">
+      <!-- Name & Email -->
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Full Name <span class="req">*</span></label>
+          <input type="text" name="fullName" placeholder="Enter your full name" required />
+        </div>
+        <div class="form-group">
+          <label>Email Address <span class="req">*</span></label>
+          <input type="email" name="email" placeholder="Enter your email address" required />
+        </div>
+      </div>
+
+      <!-- WhatsApp & CNIC -->
+      <div class="grid-2">
+        <div class="form-group">
+          <label>WhatsApp Number <span class="req">*</span></label>
+          <input type="tel" name="whatsapp" placeholder="Enter your WhatsApp number" required />
+        </div>
+        <div class="form-group">
+          <label>CNIC <span class="req">*</span></label>
+          <input type="text" name="cnic" placeholder="Enter 13 digits only" maxlength="13" required />
+          <div class="sub-text">Enter 13 digits without dashes</div>
+        </div>
+      </div>
+
+      <!-- Current Institution -->
+      <div class="form-group">
+        <label>Current Institution <span class="req">*</span></label>
+        <input type="text" name="institution" placeholder="Enter your school/college name" required />
+      </div>
+
+      <!-- MUN Experience -->
+      <div class="form-group">
+        <label>MUN Experience</label>
+        <textarea name="experience" placeholder="Describe your previous MUN experience (optional)"></textarea>
+      </div>
+
+      <!-- Committee Preference -->
+      <div class="form-group">
+        <label>Committee Preference <span class="req">*</span> (Select one)</label>
+        <div class="committee-grid">
+          <label class="radio-card">
+            <input type="radio" name="committee" value="Pakistan National Assembly" required />
+            <span>Pakistan National Assembly</span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="committee" value="Special Crisis Committee" />
+            <span>Special Crisis Committee</span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="committee" value="United Nations Security Council" />
+            <span>United Nations Security Council</span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="committee" value="United Nations Human Rights Council" />
+            <span>United Nations Human Rights Council</span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="committee" value="Disarmament and International Security Committee" />
+            <span>Disarmament and International Security Committee</span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="committee" value="Commission on the Status of Women" />
+            <span>Commission on the Status of Women</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Referral Source -->
+      <div class="form-group">
+        <label>How did you hear about us? <span class="req">*</span></label>
+        <select name="referralSource" required>
+          <option value="" disabled selected>Select an option</option>
+          <option value="Social Media">Social Media</option>
+          <option value="Friend/Delegate">Friend or Delegate</option>
+          <option value="School Ambassador">School Ambassador</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <!-- Registration Fee Display -->
+      <div class="fee-card">
+        <div>
+          <h3>Registration Fee</h3>
+          <p>Private Delegate Registration</p>
+        </div>
+        <div class="fee-amount">PKR 3,200</div>
+      </div>
+
+      <!-- Bank Details Box -->
+      <div class="bank-card">
+        <label style="color:#94a3b8; font-weight:normal; margin-bottom:4px;">Bank Details for Payment</label>
+        <h3>FARZANA PERVEEN</h3>
+        <div class="bank-acc-row">
+          <span class="account-num" id="accNumber">01201003345332</span>
+          <button type="button" class="btn-copy" onclick="copyAccount()">Copy</button>
+        </div>
+        <div class="bank-name">Bank Alfalah</div>
+      </div>
+
+      <div class="bank-notes">
+        <p>Please make the payment to the above account and upload proof of payment.</p>
+        <p class="warn">Fees are non-refundable.</p>
+      </div>
+
+      <!-- Payment Proof File Upload -->
+      <div class="form-group">
+        <label>Payment Proof <span class="req">*</span></label>
+        <div class="file-input-wrapper">
+          <input type="file" id="paymentProof" accept=".jpg,.png,.jpeg,.pdf" required />
+        </div>
+        <div class="sub-text">Upload a screenshot or image of your payment proof (JPG, PNG, or PDF). Maximum file size: 2MB</div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" id="submitBtn" class="btn-submit">Submit Registration</button>
+    </form>
+
+    <div class="footer-contact">
+      Need help? Contact us at <a href="mailto:fimmunv@gmail.com">fimmunv@gmail.com</a>
+    </div>
+  </div>
+
+  <script>
+    // ==========================================
+    // PASTE YOUR GOOGLE APPS SCRIPT URL HERE:
+    // ==========================================
+    const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+
+    // Copy Account Number Function
+    function copyAccount() {
+      const accNum = document.getElementById('accNumber').innerText;
+      navigator.clipboard.writeText(accNum);
+      alert('Account number copied to clipboard!');
+    }
+
+    // Convert file to Base64
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // Handle Form Submission
+    const form = document.getElementById('fimmunForm');
+    const submitBtn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Submitting...';
+
+      try {
+        const fileInput = document.getElementById('paymentProof').files[0];
+        let fileData = null;
+        let fileName = '';
+        let fileMimeType = '';
+
+        if (fileInput) {
+          fileData = await fileToBase64(fileInput);
+          fileName = fileInput.name;
+          fileMimeType = fileInput.type;
+        }
+
+        const formData = new FormData(form);
+        const payload = Object.fromEntries(formData.entries());
+        payload.fileData = fileData;
+        payload.fileName = fileName;
+        payload.fileMimeType = fileMimeType;
+
+        await fetch(scriptURL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        alert('Registration Submitted Successfully!');
+        form.reset();
+      } catch (error) {
+        console.error('Error!', error.message);
+        alert('An error occurred during submission. Please try again.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Submit Registration';
+      }
+    });
+  </script>
+</body>
+</html>
